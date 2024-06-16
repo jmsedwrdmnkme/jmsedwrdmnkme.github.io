@@ -1,7 +1,7 @@
 {
   "name": "front-end-boilerplate",
   "version": "1.0.0",
-  "description": "Minimal front end boilerplate, kept up to date via Node package manager",
+  "description": "Minimal front end boilerplate, kept up to date via PNPM",
   "main": "gulpfile.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
