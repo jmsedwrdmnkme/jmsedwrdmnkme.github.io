@@ -40,7 +40,7 @@ export function videos() {
 
 export function scripts() {
   return src('src/js/main.js', {encoding: false})
-    .pipe(webpack({}, compiler, function(err, stats) {}))
+    .pipe(webpack({}, compiler, function() {}))
     .pipe(uglify())
     .pipe(concat('main.js'))
     .pipe(dest('dist/js/'))
@@ -131,7 +131,7 @@ export function sitemaps() {
     read: false
   })
     .pipe(sitemap({
-      siteUrl: 'https://feb.jamesmonk.me',
+      siteUrl: 'https://jamesmonk.me',
       fileName: 'sitemap.xml',
       changefreq: 'weekly',
       priority: function(siteUrl, loc, entry) {
