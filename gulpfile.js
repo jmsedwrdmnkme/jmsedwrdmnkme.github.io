@@ -1,6 +1,3 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
 import {src, dest, watch, series, parallel} from 'gulp';
 import {deleteAsync} from 'del';
 import * as dartSass from 'sass'
