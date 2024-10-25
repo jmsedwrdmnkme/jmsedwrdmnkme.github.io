@@ -11,9 +11,6 @@ importers:
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
-      bootstrap:
-        specifier: ^5.3.3
-        version: 5.3.3(@popperjs/core@2.11.8)
       browser-sync:
         specifier: ^3.0.2
         version: 3.0.2
@@ -41,12 +38,12 @@ importers:
       gulp-imagemin:
         specifier: ^9.1.0
         version: 9.1.0(gulp@5.0.0)
+      gulp-postcss:
+        specifier: ^10.0.0
+        version: 10.0.0(postcss@8.4.45)
       gulp-purgecss:
         specifier: ^6.0.0
         version: 6.0.0
-      gulp-sass:
-        specifier: ^5.1.0
-        version: 5.1.0
       gulp-sitemap:
         specifier: ^8.0.0
         version: 8.0.0
@@ -59,6 +56,9 @@ importers:
       gulp-webp:
         specifier: ^5.0.0
         version: 5.0.0(gulp@5.0.0)
+      postcss-import:
+        specifier: ^16.1.0
+        version: 16.1.0(postcss@8.4.45)
       sass:
         specifier: ^1.78.0
         version: 1.78.0
@@ -604,11 +604,6 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
-
-  bootstrap@5.3.3:
-    resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
-    peerDependencies:
-      '@popperjs/core': ^2.11.8
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -1275,6 +1270,10 @@ packages:
     resolution: {integrity: sha512-k9oEhlyc0FrVh25qYuSELjr8oxsCoc4/LEZfg2iJJrfEk/tZL9bCoJE47gqAvI2m/AUjluCS4+3I0eTx8n3AEw==}
     engines: {node: '>= 0.10'}
 
+  fancy-log@2.0.0:
+    resolution: {integrity: sha512-9CzxZbACXMUXW13tS0tI8XsGGmxWzO2DmYrGuBJOJ8k8q2K7hwfJA5qHjuPPe8wtsco33YR9wc+Rlr5wYFvhSA==}
+    engines: {node: '>=10.13.0'}
+
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
@@ -1613,12 +1612,14 @@ packages:
     resolution: {integrity: sha512-YXizWkBgb2030JBuHZ9DQFTkphnKgzwknL+ozSoCKdv8Zt1S8EpVAPo+MwGxqSsd/DtFFM+kThZe6UJvM5DFsw==}
     engines: {node: '>=18'}
 
+  gulp-postcss@10.0.0:
+    resolution: {integrity: sha512-z1RF2RJEX/BvFsKN11PXai8lRmihZTiHnlJf7Zu8uHaA/Q7Om4IeN8z1NtMAW5OiLwUY02H0DIFl9tHl0CNSgA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      postcss: ^8.0.0
+
   gulp-purgecss@6.0.0:
     resolution: {integrity: sha512-NZS8GQ8Yga/exoI0Coq6VOvjP5DL13NwcFc6K70zIWM3ZVsyr4KgoepeYaOqH5gOCMv7vbzX0q4TeCNmi1687w==}
-
-  gulp-sass@5.1.0:
-    resolution: {integrity: sha512-7VT0uaF+VZCmkNBglfe1b34bxn/AfcssquLKVDYnCDJ3xNBaW7cUuI3p3BQmoKcoKFrs9jdzUxyb+u+NGfL4OQ==}
-    engines: {node: '>=12'}
 
   gulp-sitemap@8.0.0:
     resolution: {integrity: sha512-rXvje8NxCAXxis1aqwUEhDU8iWnLcda2Ky/Cn4g2iWjWzaKahZ6lXbVy+HzjtfMslmVY9ownKVFe4ADTINM+Jw==}
@@ -2074,6 +2075,10 @@ packages:
     resolution: {integrity: sha512-a5BQjbCHnB+cy+gsro8lXJ4kZluzOijzJ1UVVfyJYZC+IP2pLv1h4+aysQeKuTmyO8NAqfyQAk4HWaP/HjcKTg==}
     engines: {node: '>=10.13.0'}
 
+  lilconfig@3.1.2:
+    resolution: {integrity: sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==}
+    engines: {node: '>=14'}
+
   limiter@1.1.5:
     resolution: {integrity: sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==}
 
@@ -2097,9 +2102,6 @@ packages:
 
   lodash.clone@4.5.0:
     resolution: {integrity: sha512-GhrVeweiTD6uTmmn5hV/lzgCQhccwReIVRLHp7LT4SopOjqEZ5BbX8b5WWEtAKasjmy8hR7ZPwsYlxRCku5odg==}
-
-  lodash.clonedeep@4.5.0:
-    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
   lodash.defaults@4.2.0:
     resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
@@ -2676,6 +2678,27 @@ packages:
     peerDependencies:
       postcss: ^8.3.0
 
+  postcss-import@16.1.0:
+    resolution: {integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      postcss: ^8.0.0
+
+  postcss-load-config@5.1.0:
+    resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      jiti: '>=1.21.0'
+      postcss: '>=8.0.9'
+      tsx: ^4.8.1
+    peerDependenciesMeta:
+      jiti:
+        optional: true
+      postcss:
+        optional: true
+      tsx:
+        optional: true
+
   postcss-selector-parser@6.1.2:
     resolution: {integrity: sha512-Q8qQfPiZ+THO/3ZrOrO0cJJKfpYCagtMUkXbnEfmgUjwXg6z/WBeOyS9APBBPCTSiDV+s4SwQGu8yFsiMRIudg==}
     engines: {node: '>=4'}
@@ -2685,6 +2708,9 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       postcss: ^8.0.0
+
+  postcss-value-parser@4.2.0:
+    resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
   postcss@8.4.45:
     resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
@@ -2774,6 +2800,9 @@ packages:
   raw-body@2.5.2:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
+
+  read-cache@1.0.0:
+    resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
 
   read-pkg-up@7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -3634,6 +3663,11 @@ packages:
   yallist@2.1.2:
     resolution: {integrity: sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A==}
 
+  yaml@2.6.0:
+    resolution: {integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   yargs-parser@18.1.3:
     resolution: {integrity: sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==}
     engines: {node: '>=6'}
@@ -4167,10 +4201,6 @@ snapshots:
       readable-stream: 3.6.2
 
   boolbase@1.0.0: {}
-
-  bootstrap@5.3.3(@popperjs/core@2.11.8):
-    dependencies:
-      '@popperjs/core': 2.11.8
 
   brace-expansion@1.1.11:
     dependencies:
@@ -5039,6 +5069,10 @@ snapshots:
       parse-node-version: 1.0.1
       time-stamp: 1.1.0
 
+  fancy-log@2.0.0:
+    dependencies:
+      color-support: 1.1.3
+
   fast-deep-equal@3.1.3: {}
 
   fast-equals@5.0.1: {}
@@ -5493,21 +5527,23 @@ snapshots:
       chalk: 5.3.0
       easy-transform-stream: 1.0.1
 
+  gulp-postcss@10.0.0(postcss@8.4.45):
+    dependencies:
+      fancy-log: 2.0.0
+      plugin-error: 2.0.1
+      postcss: 8.4.45
+      postcss-load-config: 5.1.0(postcss@8.4.45)
+      vinyl-sourcemaps-apply: 0.2.1
+    transitivePeerDependencies:
+      - jiti
+      - tsx
+
   gulp-purgecss@6.0.0:
     dependencies:
       glob: 10.4.5
       plugin-error: 2.0.1
       purgecss: 6.0.0
       through2: 4.0.2
-      vinyl-sourcemaps-apply: 0.2.1
-
-  gulp-sass@5.1.0:
-    dependencies:
-      lodash.clonedeep: 4.5.0
-      picocolors: 1.1.0
-      plugin-error: 1.0.1
-      replace-ext: 2.0.0
-      strip-ansi: 6.0.1
       vinyl-sourcemaps-apply: 0.2.1
 
   gulp-sitemap@8.0.0:
@@ -6011,6 +6047,8 @@ snapshots:
       rechoir: 0.8.0
       resolve: 1.22.8
 
+  lilconfig@3.1.2: {}
+
   limiter@1.1.5: {}
 
   lines-and-columns@1.2.4: {}
@@ -6028,8 +6066,6 @@ snapshots:
   lodash-es@4.17.21: {}
 
   lodash.clone@4.5.0: {}
-
-  lodash.clonedeep@4.5.0: {}
 
   lodash.defaults@4.2.0: {}
 
@@ -6543,6 +6579,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  postcss-import@16.1.0(postcss@8.4.45):
+    dependencies:
+      postcss: 8.4.45
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.8
+
+  postcss-load-config@5.1.0(postcss@8.4.45):
+    dependencies:
+      lilconfig: 3.1.2
+      yaml: 2.6.0
+    optionalDependencies:
+      postcss: 8.4.45
+
   postcss-selector-parser@6.1.2:
     dependencies:
       cssesc: 3.0.0
@@ -6555,6 +6605,8 @@ snapshots:
       minimatch: 3.0.8
       postcss: 8.4.45
       xxhashjs: 0.2.2
+
+  postcss-value-parser@4.2.0: {}
 
   postcss@8.4.45:
     dependencies:
@@ -6643,6 +6695,10 @@ snapshots:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  read-cache@1.0.0:
+    dependencies:
+      pify: 2.3.0
 
   read-pkg-up@7.0.1:
     dependencies:
@@ -7537,6 +7593,8 @@ snapshots:
   y18n@5.0.8: {}
 
   yallist@2.1.2: {}
+
+  yaml@2.6.0: {}
 
   yargs-parser@18.1.3:
     dependencies:

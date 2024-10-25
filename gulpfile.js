@@ -1,8 +1,7 @@
 import {src, dest, watch, series, parallel} from 'gulp';
 import {deleteAsync} from 'del';
-import * as dartSass from 'sass'
-import gulpSass from 'gulp-sass';
-const sass = gulpSass( dartSass );
+import postcss from 'gulp-postcss';
+import atImport from 'postcss-import';
 import cleanCSS from 'gulp-clean-css';
 import purgecss from 'gulp-purgecss';
 import {stream as critical} from 'critical';
@@ -48,11 +47,10 @@ export function scripts() {
 }
 
 export function styles() {
-  return src('src/scss/main.scss', {encoding: false})
-    .pipe(sass({outputStyle: 'compressed'}))
+  return src('src/css/main.css', {encoding: false})
+    .pipe(postcss([atImport]))
     .pipe(purgecss({
-      content: ['dist/*.html'],
-      safelist: [/carousel*/]
+      content: ['dist/*.html']
     }))
     .pipe(cleanCSS())
     .pipe(dest('dist/css/'))
@@ -155,7 +153,7 @@ export function browserSyncReload(done) {
 function watchFiles() {
   watch('src/js/**/*.js', scripts);
   watch('src/sprite/**/*.svg', sprite);
-  watch(['src/html/**/*.hbs', 'src/scss/**/*.scss'], htmlBuild);
+  watch(['src/html/**/*.hbs', 'src/css/**/*.css'], htmlBuild);
   watch('src/img/**/*', images);
   watch('src/root/**/*', root);
 }

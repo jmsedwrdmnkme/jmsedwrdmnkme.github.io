@@ -16,7 +16,6 @@
   "type": "module",
   "devDependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.3",
     "browser-sync": "^3.0.2",
     "critical": "^7.2.0",
     "del": "^7.1.0",
@@ -26,12 +25,13 @@
     "gulp-ext-replace": "^0.3.0",
     "gulp-hb": "^8.0.0",
     "gulp-imagemin": "^9.1.0",
+    "gulp-postcss": "^10.0.0",
     "gulp-purgecss": "^6.0.0",
-    "gulp-sass": "^5.1.0",
     "gulp-sitemap": "^8.0.0",
     "gulp-svg-sprite": "^2.0.3",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^5.0.0",
+    "postcss-import": "^16.1.0",
     "sass": "^1.78.0",
     "webpack": "^5.94.0",
     "webpack-stream": "^7.0.0"
