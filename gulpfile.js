@@ -1,8 +1,8 @@
 import {src, dest, watch, series, parallel} from 'gulp';
 import {deleteAsync} from 'del';
 import postcss from 'gulp-postcss';
+import cssnano from 'cssnano';
 import atImport from 'postcss-import';
-import cleanCSS from 'gulp-clean-css';
 import purgecss from 'gulp-purgecss';
 import {stream as critical} from 'critical';
 import compiler from 'webpack';
@@ -48,11 +48,10 @@ export function scripts() {
 
 export function styles() {
   return src('src/css/main.css', {encoding: false})
-    .pipe(postcss([atImport]))
+    .pipe(postcss([atImport, cssnano()]))
     .pipe(purgecss({
       content: ['dist/*.html']
     }))
-    .pipe(cleanCSS())
     .pipe(dest('dist/css/'))
     .pipe(browsersync.stream());
 }
@@ -63,7 +62,7 @@ export function criticalStyles() {
       critical({
         base: 'dist/',
         inline: true,
-        css: 'dist/css/main.css'
+        uncritical: 'dist/css/main.css'
       })
     )
     .pipe(dest('dist/'))
