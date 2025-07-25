@@ -18,12 +18,6 @@ import browsersync from 'browser-sync';
 
 export const clean = () => deleteAsync('dist/');
 
-export function root() {
-  return src(['src/root/*', 'src/root/.*'], {encoding: false})
-    .pipe(dest('dist/'))
-    .pipe(browsersync.stream());
-}
-
 export function fonts() {
   return src('src/fonts/*', {encoding: false})
     .pipe(dest('dist/fonts/'))
@@ -143,11 +137,10 @@ function watchFiles() {
   watch('src/js/**/*.js', scripts);
   watch(['src/html/**/*.hbs', 'src/css/**/*.css'], htmlBuild);
   watch('src/img/**/*', images);
-  watch('src/root/**/*', root);
 }
 
 const htmlBuild = series(html, styles, criticalStyles, sitemaps);
-export const build = series(clean, parallel(root, fonts, images, scripts), htmlBuild);
+export const build = series(clean, parallel(fonts, images, scripts), htmlBuild);
 const watchSrc = series(build, browserSync, watchFiles);
 
 export default watchSrc;
