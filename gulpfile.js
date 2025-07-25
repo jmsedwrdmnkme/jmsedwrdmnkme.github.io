@@ -9,7 +9,6 @@ import compiler from 'webpack';
 import webpack from 'webpack-stream';
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
-import svgsprite from 'gulp-svg-sprite';
 import imagemin, {gifsicle, mozjpeg, optipng, svgo} from 'gulp-imagemin';
 import webp from 'gulp-webp';
 import hb from 'gulp-hb';
@@ -28,12 +27,6 @@ export function root() {
 export function fonts() {
   return src('src/fonts/*', {encoding: false})
     .pipe(dest('dist/fonts/'))
-    .pipe(browsersync.stream());
-}
-
-export function videos() {
-  return src('src/videos/*', {encoding: false})
-    .pipe(dest('dist/videos/'))
     .pipe(browsersync.stream());
 }
 
@@ -65,24 +58,16 @@ export function criticalStyles() {
   return src('dist/**/*.html', {encoding: false})
     .pipe(
       critical({
-        base: 'dist/',
         inline: true,
-        css: 'dist/css/main.css'
+        base: 'dist/',
+        css: 'dist/css/main.css',
+        target: {
+          uncritical: 'css/main.css'
+        },
+        extract: true
       })
     )
     .pipe(dest('dist/'))
-    .pipe(browsersync.stream());
-}
-
-export function sprite() {
-  return src('src/sprite/**/**/*.svg', {encoding: false})
-    .pipe(svgsprite({
-      shape: { spacing: { padding: 5 } },
-      mode: { symbol: true },
-      svg: { xmlDeclaration: false, doctypeDeclaration: false, namespaceIDs: false, namespaceClassnames: false }
-    }))
-    .pipe(concat('sprite.hbs'))
-    .pipe(dest('src/html/partials/global/'))
     .pipe(browsersync.stream());
 }
 
@@ -156,14 +141,13 @@ export function browserSyncReload(done) {
 
 function watchFiles() {
   watch('src/js/**/*.js', scripts);
-  watch('src/sprite/**/*.svg', sprite);
   watch(['src/html/**/*.hbs', 'src/css/**/*.css'], htmlBuild);
   watch('src/img/**/*', images);
   watch('src/root/**/*', root);
 }
 
 const htmlBuild = series(html, styles, criticalStyles, sitemaps);
-export const build = series(clean, parallel(root, fonts, sprite, images, videos, scripts), htmlBuild);
+export const build = series(clean, parallel(root, fonts, images, scripts), htmlBuild);
 const watchSrc = series(build, browserSync, watchFiles);
 
 export default watchSrc;

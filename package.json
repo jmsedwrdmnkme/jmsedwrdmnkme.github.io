@@ -1,5 +1,5 @@
 {
-  "name": "front-end-boilerplate",
+  "name": "jamesmonk.me",
   "version": "1.0.0",
   "description": "Minimal front end boilerplate, kept up to date via PNPM",
   "main": "gulpfile.js",
@@ -27,10 +27,8 @@
     "gulp-postcss": "^10.0.0",
     "gulp-purgecss": "^7.0.2",
     "gulp-sitemap": "^8.0.0",
-    "gulp-svg-sprite": "^2.0.3",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^5.0.0",
-    "minireset.css": "^0.0.7",
     "postcss-import": "^16.1.0",
     "webpack": "^5.98.0",
     "webpack-stream": "^7.0.0"
