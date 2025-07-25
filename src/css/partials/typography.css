@@ -1,0 +1,10 @@
+body {
+  font-size: calc(.8rem + 1vw);
+  line-height: 1.5;
+  max-width: 60ch;
+  padding: 5vw;
+}
+
+p + p {
+  margin-top: 1.5ch;
+}

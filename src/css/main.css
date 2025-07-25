@@ -1,14 +1,7 @@
-@import 'variables/_colours';
+@import 'utils/reset';
 
-@import '../../node_modules/minireset.css/minireset.css';
-@import 'utilities/_display';
+@import 'partials/containers';
+@import 'partials/typography';
 
-@import 'partials/_containers';
-@import 'partials/_typography';
-@import 'partials/_links';
-@import 'partials/_lists';
-@import 'partials/_nav';
-@import 'partials/_forms';
-@import 'partials/_buttons';
-@import 'partials/_blockquote';
-@import 'partials/_table';
+@import 'components/logo';
+@import 'components/links';
