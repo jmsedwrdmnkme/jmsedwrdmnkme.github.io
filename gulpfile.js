@@ -133,7 +133,7 @@ export function sitemaps() {
     read: false
   })
     .pipe(sitemap({
-      siteUrl: 'localhost',
+      siteUrl: 'https://jamesmonk.me',
       fileName: 'sitemap.xml',
       changefreq: 'weekly',
       priority: function(siteUrl, loc, entry) {
