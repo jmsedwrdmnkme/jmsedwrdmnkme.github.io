@@ -17,6 +17,12 @@ import browsersync from 'browser-sync';
 
 export const clean = () => deleteAsync('dist/');
 
+export function root() {
+  return src('src/root/*', {encoding: false})
+    .pipe(dest('dist/'))
+    .pipe(browsersync.stream());
+}
+
 export function fonts() {
   return src('src/fonts/*', {encoding: false})
     .pipe(dest('dist/fonts/'))
@@ -143,7 +149,7 @@ function watchFiles() {
 }
 
 const htmlBuild = series(html, styles, criticalStyles, sitemaps);
-export const build = series(clean, parallel(fonts, images, scripts), htmlBuild);
+export const build = series(clean, parallel(root, fonts, images, scripts), htmlBuild);
 const watchSrc = series(build, browserSync, watchFiles);
 
 export default watchSrc;
