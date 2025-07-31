@@ -5,6 +5,8 @@ body {
   padding: 5vw;
 }
 
-p + p {
-  margin-top: 1.5ch;
+p {
+  & + p {
+    margin-top: 1.5ch;
+  }
 }

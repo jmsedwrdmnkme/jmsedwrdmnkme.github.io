@@ -29,7 +29,6 @@
     "gulp-sitemap": "^8.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^5.0.0",
-    "postcss-import": "^16.1.1",
     "webpack": "^5.100.2",
     "webpack-stream": "^7.0.0"
   }

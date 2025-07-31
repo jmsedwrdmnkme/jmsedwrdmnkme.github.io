@@ -1,17 +1,19 @@
 .button {
-  background: blue;
+  --btn-bg: blue;
+
+  background: var(--btn-bg);
   color: white;
   display: inline-block;
   margin-top: .5ch;
   padding: .5ch 1ch;
   transition: background-color .2s;
   text-decoration: none;
-}
 
-.button:hover {
-  background: purple;
-}
+  &:hover {
+    --btn-bg: purple;
+  }
 
-.button:focus {
-  outline: 0.25ch solid red;
+  &:focus {
+    outline: 0.25ch solid red;
+  }
 }
