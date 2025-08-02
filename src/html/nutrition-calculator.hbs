@@ -21,6 +21,10 @@
       margin-top: unset !important;
     }
 
+    h1 {
+      margin-top: 0;
+    }
+
     input, select {
       all: unset;
       border-bottom: .125em purple solid;
@@ -67,40 +71,41 @@
     <p>
       I am a biological
       <label id="label-sex" hidden>Sex</label>
-      <select id="sex" onchange="calsPerDay()" value="0" aria-describedby="label-sex">
-        <option value="male" selected>man</option>
+      <select id="sex" value="0" aria-describedby="label-sex">
+        <option selected>. . .</option>
+        <option value="male">man</option>
         <option value="female">woman</option>
       </select>
       who is
       <label id="label-age" hidden>Age</label>
-      <input id="age" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-age">
+      <input id="age" type="number" placeholder="0" value="" aria-describedby="label-age">
       years old. I am
       <label id="label-height" hidden>Height (cm)</label>
-      <input id="height" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-height">cm tall
+      <input id="height" type="number" placeholder="0" value="" aria-describedby="label-height">cm tall
       and weigh
       <label id="label-weight" hidden>Weight (kg)</label>
-      <input id="weight" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-weight">kgs.
+      <input id="weight" type="number" placeholder="0" value="" aria-describedby="label-weight">kgs.
     </p>
 
     <p>
       I am
       <label id="label-physique" hidden>Physique</label>
-      <select id="physique" type="text" onchange="calsPerDay()" value="0" aria-describedby="label-physique">
-        <option value="2.6">shredded</option>
-        <option value="2.3" selected>lean/athletic</option>
+      <select id="physique" type="text" value="0" aria-describedby="label-physique">
+        <option value="2.7">shredded</option>
+        <option value="2.45" selected>lean/athletic</option>
         <option value="2">carrying a little fat</option>
-        <option value="1.8">obese</option>
+        <option value="1.6">obese</option>
       </select>
       and wish to
       <label id="label-goal" hidden>Goal</label>
-      <select id="goal" type="text" onchange="calsPerDay()" value="0" aria-describedby="label-goal">
+      <select id="goal" type="text" value="0" aria-describedby="label-goal">
         <option value="0.8">lose fat</option>
         <option value="1" selected>maintain weight</option>
         <option value="1.1">gain muscle</option>
       </select>
       with a
       <label id="label-activity" hidden>Activity</label>
-      <select id="activity" type="text" onchange="calsPerDay()" value="0" aria-describedby="label-activity">
+      <select id="activity" type="text" value="0" aria-describedby="label-activity">
         <option value="1.2">sedentary</option>
         <option value="1.375">light</option>
         <option value="1.55" selected>moderate</option>
@@ -125,41 +130,31 @@
 </footer>
 
 <script>
-  function calsPerDay() {
-    const age = document.getElementById("age").value,
-      height = document.getElementById("height").value,
-      weight = document.getElementById("weight").value,
-      activity = document.getElementById("activity").value,
-      sex = document.getElementById("sex").value,
-      goal = document.getElementById("goal").value;
-      physique = document.getElementById("physique").value;
+  let result;
 
-    let result;
+  document.querySelectorAll(["select", "input"]).forEach((trigger) => {
+    trigger.addEventListener("change", () => {
+      const age = document.getElementById("age").value,
+        height = document.getElementById("height").value,
+        weight = document.getElementById("weight").value,
+        activity = document.getElementById("activity").value,
+        sex = document.getElementById("sex").value,
+        goal = document.getElementById("goal").value;
+        physique = document.getElementById("physique").value,
+        proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8175 : 0.9,
+        fatMultiplier = 0.25;
 
-    result = ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
+      result = ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
 
-    const totalCals = document.getElementById("totalCals"),
-      totalProtein = document.getElementById("totalProtein"),
-      totalCarbs = document.getElementById("totalCarbs"),
-      totalFibre = document.getElementById("totalFibre"),
-      totalSugar = document.getElementById("totalSugar"),
-      totalFats = document.getElementById("totalFats"),
-      totalSaturatedFats = document.getElementById("totalSaturatedFats"),
-      proteinMultiplier = 0.9,
-      fatMultiplier = 0.25;
+      const dailyCarbs = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4) ;
 
-    const dailyCarbs = goal == "0.8" ? 
-      Math.round(((activity * result) - (((weight * (physique)) * 4) + ((activity * result) * fatMultiplier))) / 4) : 
-      Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4);
-
-    totalCals.innerHTML = Math.round(activity * result);
-    totalProtein.innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
-    totalCarbs.innerHTML = dailyCarbs;
-    totalFibre.innerHTML = Math.round(((activity * result) / 1000) * 14);
-    totalSugar.innerHTML = Math.round(dailyCarbs * 0.1);
-    totalFats.innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
-    totalSaturatedFats.innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
-  }
-
-  calsPerDay();
+      document.getElementById("totalCals").innerHTML = Math.round(activity * result);
+      document.getElementById("totalProtein").innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
+      document.getElementById("totalCarbs").innerHTML = dailyCarbs;
+      document.getElementById("totalFibre").innerHTML = Math.round(((activity * result) / 1000) * 14);
+      document.getElementById("totalSugar").innerHTML = Math.round(dailyCarbs * 0.1);
+      document.getElementById("totalFats").innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
+      document.getElementById("totalSaturatedFats").innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
+    });
+  });
 </script>
