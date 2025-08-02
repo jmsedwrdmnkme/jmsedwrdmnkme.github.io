@@ -93,8 +93,7 @@
       <select id="physique" type="text" value="0" aria-describedby="label-physique">
         <option value="2.7">shredded</option>
         <option value="2.45" selected>lean/athletic</option>
-        <option value="2">carrying a little fat</option>
-        <option value="1.6">obese</option>
+        <option value="2.2">carrying a little fat</option>
       </select>
       and wish to
       <label id="label-goal" hidden>Goal</label>
@@ -141,7 +140,7 @@
         sex = document.getElementById("sex").value,
         goal = document.getElementById("goal").value;
         physique = document.getElementById("physique").value,
-        proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8175 : 0.9,
+        proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8166 : 0.9,
         fatMultiplier = 0.25;
 
       result = ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
