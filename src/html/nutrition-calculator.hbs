@@ -24,17 +24,27 @@
     }
 
     input {
+      -moz-appearance: textfield;
+
       text-align: center;
       width: 4ch;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+
+      margin: 0;
     }
 
     select {
       text-align: center;
     }
 
-    p:last-child {
+    div {
       background-color: purple;
       color: white;
+      display: block;
       margin-top: 2.5ch;
       padding: 1ch;
     }
@@ -51,7 +61,7 @@
 <main>
   <form>
     <p>
-      I am biologically a
+      I am a biological
       <label id="label-sex" hidden>Sex</label>
       <select id="sex" onchange="calsPerDay()" value="0" aria-describedby="label-sex">
         <option value="male" selected>man</option>
@@ -59,13 +69,13 @@
       </select>
       who is
       <label id="label-age" hidden>Age</label>
-      <input id="age" type="text" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-age">
+      <input id="age" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-age">
       years old. I am
       <label id="label-height" hidden>Height (cm)</label>
-      <input id="height" type="text" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-height">cm tall
+      <input id="height" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-height">cm tall
       and weigh
       <label id="label-weight" hidden>Weight (kg)</label>
-      <input id="weight" type="text" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-weight">kgs.
+      <input id="weight" type="number" onchange="calsPerDay()" placeholder="0" value="" aria-describedby="label-weight">kgs.
     </p>
 
     <p>
@@ -82,77 +92,70 @@
       <select id="goal" type="text" onchange="calsPerDay()" value="0" aria-describedby="label-goal">
         <option value="0.8">lose fat</option>
         <option value="1" selected>maintain weight</option>
-        <option value="1.125">gain muscle</option>
+        <option value="1.1">gain muscle</option>
       </select>
       with a
       <label id="label-activity" hidden>Activity</label>
       <select id="activity" type="text" onchange="calsPerDay()" value="0" aria-describedby="label-activity">
-        <option value="1.1">sedentary</option>
-        <option value="1.2">mostly sedentary</option>
-        <option value="1.3" selected>pretty sedentary</option>
-        <option value="1.4">somewhat active</option>
-        <option value="1.5">active</option>
-        <option value="1.6">highly active</option>
-        <option value="1.7">very highly active</option>
-        <option value="1.8">extremely active</option>
+        <option value="1.2">sedentary</option>
+        <option value="1.375">light</option>
+        <option value="1.55" selected>moderate</option>
+        <option value="1.725">heavy</option>
+        <option value="1.9">very heavy</option>
       </select>
       activity level.
     </p>
 
-    <p>
-      You should aim for
-      <strong>
-        <span id="totalCals">0</span> calories (kcals),
-      </strong>
+    <div>
+      <p>You should aim for <strong><span id="totalCals">0</span> calories (kcals)</strong>, <strong><span id="totalProtein">0</span>g protein</strong>, <strong><span id="totalCarbs">0</span>g carbohydrates</strong> and <strong><span id="totalFats">0</span>g fats</strong> daily.</p>
 
-      <strong>
-        <span id="totalProtein">0</span>g protein,
-      </strong>
+      <p>You should eat around <strong><span id="totalFibre">0</span>g fibre</strong>, and limit upper intake to <strong><span id="totalSugar">0</span>g sugar</strong> and <strong><span id="totalSaturatedFats">0</span>g saturated fat</strong> for "optimal" health.</p>
 
-      <strong>
-        <span id="totalCarbs">0</span>g carbohydrates
-      </strong>
-      and
-      <strong>
-        <span id="totalFats">0</span>g fats
-      </strong>
-      daily.
-    </p>
+      <p>Ideally, consume <strong>1-2g of Omega 3</strong> (DHA/EPA total), also <strong>drink plenty of fluids/water!</strong></p>
+    </div>
   </form>
 </main>
 
 <footer>
-  <small>Last update: 2025/08/01</small>
+  <small>Last update: 2025/08/02</small>
 </footer>
 
 <script>
   function calsPerDay() {
-    const age = document.getElementById("age").value
-    const height = document.getElementById("height").value
-    const weight = document.getElementById("weight").value
-    const activity = document.getElementById("activity").value
-    const sex = document.getElementById("sex").value
-    const goal = document.getElementById("goal").value
-    const physique = document.getElementById("physique").value
-    let result = 0
+    const age = document.getElementById("age").value,
+      height = document.getElementById("height").value,
+      weight = document.getElementById("weight").value,
+      activity = document.getElementById("activity").value,
+      sex = document.getElementById("sex").value,
+      goal = document.getElementById("goal").value;
+      physique = document.getElementById("physique").value;
 
-    if (sex == "male") {
-      result = (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) * goal
-    } else if (sex == "female") {
-      result = (447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) * goal
-    }
+    let result;
 
-    document.getElementById("totalCals").innerHTML = Math.round( activity * result )
+    result = ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
 
-    if (goal == "0.8") {
-      document.getElementById("totalProtein").innerHTML = Math.round( weight * ( physique ) )
-      document.getElementById("totalCarbs").innerHTML = Math.round( ((activity * result) - (((weight * ( physique )) * 4)+((activity * result) * 0.25))) / 4 )
-    } else {
-      document.getElementById("totalProtein").innerHTML = Math.round( weight * ( physique * 0.9 ) )
-      document.getElementById("totalCarbs").innerHTML = Math.round( ((activity * result) - (((weight * ( physique * 0.9 )) * 4)+((activity * result) * 0.25))) / 4 )
-    }
+    const totalCals = document.getElementById("totalCals"),
+      totalProtein = document.getElementById("totalProtein"),
+      totalCarbs = document.getElementById("totalCarbs"),
+      totalFibre = document.getElementById("totalFibre"),
+      totalSugar = document.getElementById("totalSugar"),
+      totalFats = document.getElementById("totalFats"),
+      totalSaturatedFats = document.getElementById("totalSaturatedFats"),
+      proteinMultiplier = 0.9,
+      fatMultiplier = 0.25;
 
-    document.getElementById("totalFats").innerHTML = Math.round( ( (activity * result) * 0.25 ) / 9 )
+    const dailyCarbs = goal == "0.8" ? 
+      Math.round(((activity * result) - (((weight * (physique)) * 4) + ((activity * result) * fatMultiplier))) / 4) : 
+      Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4);
+
+    totalCals.innerHTML = Math.round(activity * result);
+    totalProtein.innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
+    totalCarbs.innerHTML = dailyCarbs;
+    totalFibre.innerHTML = Math.round(((activity * result) / 1000) * 14);
+    totalSugar.innerHTML = Math.round(dailyCarbs * 0.1);
+    totalFats.innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
+    totalSaturatedFats.innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
   }
+
   calsPerDay();
 </script>
