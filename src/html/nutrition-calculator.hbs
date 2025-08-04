@@ -55,14 +55,8 @@
       background-color: purple;
       color: white;
       display: block;
-      margin-top: 2.5ch;
+      margin-top: 1.75ch;
       padding: 1ch;
-    }
-
-    footer {
-      align-items: flex-end;
-      display: flex;
-      justify-content: space-between;
     }
   </style>
 
@@ -77,7 +71,7 @@
 <main>
   <form>
     <p>
-      I am a biological
+      A biological
       <label id="label-sex" hidden>Sex</label>
       <select id="sex" value="0" aria-describedby="label-sex">
         <option selected>. . .</option>
@@ -87,54 +81,50 @@
       who is
       <label id="label-age" hidden>Age</label>
       <input id="age" type="number" placeholder="0" value="" aria-describedby="label-age">
-      years old. I am
+      years old,
       <label id="label-height" hidden>Height (cm)</label>
       <input id="height" type="number" placeholder="0" value="" aria-describedby="label-height">cm tall
-      and weigh
+      and weighs
       <label id="label-weight" hidden>Weight (kg)</label>
       <input id="weight" type="number" placeholder="0" value="" aria-describedby="label-weight">kgs.
     </p>
-
     <p>
-      I am
       <label id="label-physique" hidden>Physique</label>
       <select id="physique" type="text" value="0" aria-describedby="label-physique">
-        <option value="2.7">shredded</option>
-        <option value="2.45" selected>lean/athletic</option>
-        <option value="2.2">carrying a little fat</option>
+        <option value="2.7">Shredded</option>
+        <option value="2.45" selected>Lean/Athletic</option>
+        <option value="2.2">Carrying a little fat</option>
       </select>
-      and wish to
+      wishing to
       <label id="label-goal" hidden>Goal</label>
       <select id="goal" type="text" value="0" aria-describedby="label-goal">
         <option value="0.8">lose fat</option>
-        <option value="1" selected>maintain weight</option>
+        <option value="1" selected>maintain</option>
         <option value="1.1">gain muscle</option>
       </select>
-      with a
-      <label id="label-activity" hidden>Activity</label>
-      <select id="activity" type="text" value="0" aria-describedby="label-activity">
-        <option value="1.2">sedentary</option>
-        <option value="1.375">light</option>
-        <option value="1.55" selected>moderate</option>
-        <option value="1.725">heavy</option>
-        <option value="1.9">very heavy</option>
-      </select>
-      activity level.
+      <span class="disabled">
+       with
+        <label id="label-activity" hidden>Activity</label>
+        <select id="activity" type="text" value="0" aria-describedby="label-activity">
+          <option value="1.2">sedentary</option>
+          <option value="1.375">light</option>
+          <option value="1.55" selected>moderate</option>
+          <option value="1.725">heavy</option>
+          <option value="1.9">very heavy</option>
+        </select>
+        activity level</span>.
     </p>
-
+    <p><small><em>(I know my <label id="label-maintenance">maintenance calories</label>, they are <input id="maintenance" type="number" placeholder="" value="" aria-describedby="label-maintenance">)</em></small></p>
     <div>
-      <p>You should aim for <strong><span id="totalCals">0</span> calories (kcals)</strong>, <strong><span id="totalProtein">0</span>g protein</strong>, <strong><span id="totalCarbs">0</span>g carbohydrates</strong> and <strong><span id="totalFats">0</span>g fats</strong> daily.</p>
-
-      <p>You should eat around <strong><span id="totalFibre">0</span>g fibre</strong>, and limit upper intake to <strong><span id="totalSugar">0</span>g sugar</strong> and <strong><span id="totalSaturatedFats">0</span>g saturated fat</strong> for "optimal" health.</p>
-
-      <p>Ideally, consume <strong>1-2g of Omega 3</strong> (DHA/EPA total), also <strong>drink plenty of fluids/water!</strong></p>
+      <p>Aim for <strong><span id="totalCals">0</span> calories (kcals)</strong>, <strong><span id="totalProtein">0</span>g protein</strong>, <strong><span id="totalCarbs">0</span>g carbohydrates</strong> and <strong><span id="totalFats">0</span>g fats</strong> daily.</p>
+      <p>Eat around <strong><span id="totalFibre">0</span>g fibre</strong>, and limit upper intake to <strong><span id="totalSugar">0</span>g sugar</strong> and <strong><span id="totalSaturatedFats">0</span>g saturated fat</strong> for "optimal" health.</p>
+      <p>Ideally, consume <strong>1-2g of Omega 3</strong> (DHA/EPA total), <strong>drink plenty of fluids/water!</strong></p>
     </div>
   </form>
 </main>
 
 <footer>
-  <small>Last update: 2025/08/02</small>
-  <a href="//jamesmonk.me" class="button">Back home</a>
+  <small>Last update: 2025/08/04</small>
 </footer>
 
 <script>
@@ -149,10 +139,14 @@
         sex = document.getElementById("sex").value,
         goal = document.getElementById("goal").value;
         physique = document.getElementById("physique").value,
+        maintenance = document.getElementById("maintenance").value,
         proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8166 : 0.9,
-        fatMultiplier = 0.25;
+        fatMultiplier = 0.25,
+        disabled = document.querySelector(".disabled");
 
-      result = ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
+      result = maintenance != "" ? (maintenance / activity) * goal : ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
+
+      maintenance != "" ? disabled.style.opacity = "0.25" : disabled.style.opacity = null;
 
       const dailyCarbs = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4) ;
 
