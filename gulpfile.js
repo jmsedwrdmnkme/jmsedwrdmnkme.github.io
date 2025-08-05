@@ -20,12 +20,6 @@ export function root() {
     .pipe(browsersync.stream());
 }
 
-export function fonts() {
-  return src('src/fonts/*', {encoding: false})
-    .pipe(dest('dist/fonts/'))
-    .pipe(browsersync.stream());
-}
-
 export function styles() {
   return src([
     'src/css/utils/*.css',
@@ -136,7 +130,7 @@ function watchFiles() {
 }
 
 const htmlBuild = series(html, styles, criticalStyles, sitemaps);
-export const build = series(clean, parallel(root, fonts, images), htmlBuild);
+export const build = series(clean, parallel(root, images), htmlBuild);
 const watchSrc = series(build, browserSync, watchFiles);
 
 export default watchSrc;

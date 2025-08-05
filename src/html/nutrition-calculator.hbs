@@ -142,9 +142,10 @@
         maintenance = document.getElementById("maintenance").value,
         proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8166 : 0.9,
         fatMultiplier = 0.25,
-        disabled = document.querySelector(".disabled");
+        disabled = document.querySelector(".disabled"),
+        bmr = maintenance != "" ? maintenance / activity : ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161));
 
-      result = maintenance != "" ? (maintenance / activity) * goal : ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161)) * goal;
+      result = bmr * goal;
 
       maintenance != "" ? disabled.style.opacity = "0.25" : disabled.style.opacity = null;
 
@@ -157,6 +158,14 @@
       document.getElementById("totalSugar").innerHTML = Math.round(dailyCarbs * 0.1);
       document.getElementById("totalFats").innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
       document.getElementById("totalSaturatedFats").innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
+
+      const refeedFrequency = physique == "2.7" ? 2 : physique == "2.45" ? 1 : 0;
+      const refeedCalories = refeedFrequency * (bmr * activity);
+      const weeklyDietingCalories = (((bmr * activity) * 7) - ((7700 * (weight / 100)) * (physique == "2.7" ? 0.25 : 0.5)));
+      const dailyDietingCalories = Math.round((weeklyDietingCalories - refeedCalories) / (7 - refeedFrequency));
+      const fatLoss = goal == "0.8" ? `${refeedFrequency} x ${bmr * activity} and ${7 - refeedFrequency} at ${dailyDietingCalories} for a ${physique == "2.7" ? 0.25 : 0.5}% weekly weight loss` : null;
+
+      console.log(fatLoss);
     });
   });
 </script>
