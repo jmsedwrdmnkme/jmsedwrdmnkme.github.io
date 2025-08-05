@@ -26,6 +26,7 @@ export function styles() {
     'src/css/partials/*.css',
     'src/css/components/*.css',
   ], {encoding: false})
+    .pipe(concat('main.css'))
     .pipe(postcss([
       cssnano({
         preset: ["default", { discardComments: { removeAll: true } }]
@@ -37,7 +38,6 @@ export function styles() {
         standard: [/:/]
       }
     }))
-    .pipe(concat('main.css'))
     .pipe(dest('dist/css/'))
     .pipe(browsersync.stream());
 }
