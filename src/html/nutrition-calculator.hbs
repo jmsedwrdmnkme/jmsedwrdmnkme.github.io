@@ -146,23 +146,24 @@
         bmr = maintenance != "" ? maintenance / activity : ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161));
 
       result = bmr * goal;
-
       maintenance != "" ? disabled.style.opacity = "0.25" : disabled.style.opacity = null;
 
-      document.getElementById("totalCals").innerHTML = Math.round(activity * result);
+      const refeedFrequency = physique == "2.7" ? 3 : physique == "2.45" ? 2 : 1,
+        refeedCalories = refeedFrequency * (bmr * activity),
+        refeedLowDays = 7 - refeedFrequency,
+        fatLossPercentage = physique == "2.7" ? 0.25 : 0.5,
+        maintCalories = Math.round(bmr * activity),
+        weeklyMaintCalories = maintCalories * 7,
+        weeklyDietingCalories = (weeklyMaintCalories - ((7700 * (weight / 100)) * fatLossPercentage)),
+        dailyDietingCalories = Math.round((weeklyDietingCalories - refeedCalories) / refeedLowDays);
+
+      document.getElementById("totalCals").innerHTML = goal == "0.8" ? `high/low days of ${refeedFrequency}×${maintCalories} and ${refeedLowDays}×${dailyDietingCalories}` : Math.round(activity * result);
       document.getElementById("totalProtein").innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
       document.getElementById("totalCarbs").innerHTML = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4);
       document.getElementById("totalFibre").innerHTML = Math.round(((activity * result) / 1000) * 14);
       document.getElementById("totalSugar").innerHTML = Math.round(((activity * result) * 0.1) / 4);
       document.getElementById("totalFats").innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
       document.getElementById("totalSaturatedFats").innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
-
-      const refeedFrequency = physique == "2.7" ? 2 : physique == "2.45" ? 1 : 0;
-      const refeedCalories = refeedFrequency * (bmr * activity);
-      const weeklyDietingCalories = (((bmr * activity) * 7) - ((7700 * (weight / 100)) * (physique == "2.7" ? 0.25 : 0.5)));
-      const dailyDietingCalories = Math.round((weeklyDietingCalories - refeedCalories) / (7 - refeedFrequency));
-      const fatLoss = goal == "0.8" ? `${refeedFrequency} x ${bmr * activity} and ${7 - refeedFrequency} at ${dailyDietingCalories} for a ${physique == "2.7" ? 0.25 : 0.5}% weekly weight loss` : null;
-      console.log(fatLoss);
     });
   });
 </script>
