@@ -149,13 +149,11 @@
 
       maintenance != "" ? disabled.style.opacity = "0.25" : disabled.style.opacity = null;
 
-      const dailyCarbs = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4) ;
-
       document.getElementById("totalCals").innerHTML = Math.round(activity * result);
       document.getElementById("totalProtein").innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
-      document.getElementById("totalCarbs").innerHTML = dailyCarbs;
+      document.getElementById("totalCarbs").innerHTML = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4);
       document.getElementById("totalFibre").innerHTML = Math.round(((activity * result) / 1000) * 14);
-      document.getElementById("totalSugar").innerHTML = Math.round(dailyCarbs * 0.1);
+      document.getElementById("totalSugar").innerHTML = Math.round(((activity * result) * 0.1) / 4);
       document.getElementById("totalFats").innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
       document.getElementById("totalSaturatedFats").innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
 
@@ -164,7 +162,6 @@
       const weeklyDietingCalories = (((bmr * activity) * 7) - ((7700 * (weight / 100)) * (physique == "2.7" ? 0.25 : 0.5)));
       const dailyDietingCalories = Math.round((weeklyDietingCalories - refeedCalories) / (7 - refeedFrequency));
       const fatLoss = goal == "0.8" ? `${refeedFrequency} x ${bmr * activity} and ${7 - refeedFrequency} at ${dailyDietingCalories} for a ${physique == "2.7" ? 0.25 : 0.5}% weekly weight loss` : null;
-
       console.log(fatLoss);
     });
   });
