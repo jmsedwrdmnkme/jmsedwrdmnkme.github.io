@@ -1,169 +1,98 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Nutrition Calculator</title>
-
-  <meta name="description" content="Nuritional Calculator">
-  <meta name="keywords" content="nutrition, calculator">
-  <meta property="og:title" content="Nutrition Calculator">
-  <meta property="og:type" content="article">
-  <meta property="og:description" content="Nutrition Calculator">
-  <meta property="og:url" content="https://jamesmonk.me">
-  <meta property="og:image" content="https://jamesmonk.me/img/favicon.svg">
-
-  <link rel="shortcut icon" href="/img/favicon.svg" type="image/svg+xml" />
-
-  <style>
-    header {
-      margin-top: unset !important;
-    }
-
-    h1 {
-      font-size: 1.75em;
-      line-height: 1.2;
-      margin-top: 0;
-    }
-
-    input, select {
-      all: unset;
-      border-bottom: .125em purple solid;
-      line-height: 1.25;
-    }
-
-    input {
-      -moz-appearance: textfield;
-
-      text-align: center;
-      width: 4ch;
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-
-      margin: 0;
-    }
-
-    select {
-      text-align: center;
-    }
-
-    div {
-      background-color: purple;
-      color: white;
-      display: block;
-      margin-top: 1.75ch;
-      padding: 1ch;
-    }
-  </style>
-
-  <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
+{{> header title='Nutrition calculator' meta-title='Calculate your nutrition: Calories, protein, carbs, fats and more - for fat loss or muscle gain.' keywords="nutrition, calculator, protein, carbs, fats, fibre, fat loss, muscle gain, recomp, bodybuilding" }}
 
 <header>
   <h1>Nutrition calculator</h1>
 </header>
 
-<main>
-  <form>
-    <p>
-      A biological
-      <label id="label-sex" hidden>Sex</label>
-      <select id="sex" value="0" aria-describedby="label-sex">
-        <option selected>. . .</option>
-        <option value="male">man</option>
-        <option value="female">woman</option>
-      </select>
-      who is
-      <label id="label-age" hidden>Age</label>
-      <input id="age" type="number" placeholder="0" value="" aria-describedby="label-age">
-      years old,
-      <label id="label-height" hidden>Height (cm)</label>
-      <input id="height" type="number" placeholder="0" value="" aria-describedby="label-height">cm tall
-      and weighs
-      <label id="label-weight" hidden>Weight (kg)</label>
-      <input id="weight" type="number" placeholder="0" value="" aria-describedby="label-weight">kgs.
-    </p>
-    <p>
-      <label id="label-physique" hidden>Physique</label>
-      <select id="physique" type="text" value="0" aria-describedby="label-physique">
-        <option value="2.7">Shredded</option>
-        <option value="2.45" selected>Lean/Athletic</option>
-        <option value="2.2">Carrying a little fat</option>
-      </select>
-      wishing to
-      <label id="label-goal" hidden>Goal</label>
-      <select id="goal" type="text" value="0" aria-describedby="label-goal">
-        <option value="0.8">lose fat</option>
-        <option value="1" selected>maintain</option>
-        <option value="1.1">gain muscle</option>
-      </select>
-      <span class="disabled">
-       with
-        <label id="label-activity" hidden>Activity</label>
-        <select id="activity" type="text" value="0" aria-describedby="label-activity">
-          <option value="1.2">sedentary</option>
-          <option value="1.375">light</option>
-          <option value="1.55" selected>moderate</option>
-          <option value="1.725">heavy</option>
-          <option value="1.9">very heavy</option>
-        </select>
-        activity level</span>.
-    </p>
-    <p><small><em>(I know my <label id="label-maintenance">maintenance calories</label>, they are <input id="maintenance" type="number" placeholder="" value="" aria-describedby="label-maintenance">)</em></small></p>
-    <div>
-      <p>Aim for <strong><span id="totalCals">0</span> calories (kcals)</strong>, <strong><span id="totalProtein">0</span>g protein</strong>, <strong><span id="totalCarbs">0</span>g carbohydrates</strong> and <strong><span id="totalFats">0</span>g fats</strong> daily.</p>
-      <p>Eat around <strong><span id="totalFibre">0</span>g fibre</strong>, and limit upper intake to <strong><span id="totalSugar">0</span>g sugar</strong> and <strong><span id="totalSaturatedFats">0</span>g saturated fat</strong> for "optimal" health.</p>
-      <p>Ideally, consume <strong>1-2g of Omega 3</strong> (DHA/EPA total), <strong>drink plenty of fluids/water!</strong></p>
-    </div>
-  </form>
+<main class="nutrition">
+  <p>
+    My <label id="label-sex">biological sex</label> is a
+    <select id="sex" aria-describedby="label-sex" aria-label="Sex">
+      <option value="man" selected>man</option>
+      <option value="woman">woman</option>
+    </select>
+
+    who is
+    <input id="age" type="number" placeholder="0" aria-describedby="label-age" aria-label="Age">
+    <label id="label-age" for="age">years old</label>.
+
+    I am
+    <input id="height" type="number" placeholder="0" aria-describedby="label-height" aria-label="Height (cm)">
+    <label id="label-height" for="height">cm in height</label>
+
+    and
+    <input id="weight" type="number" placeholder="0" aria-describedby="label-weight" aria-label="Weight (kg)">
+    <label id="label-weight" for="weight">kg in weight</label>.
+  </p>
+
+  <p>
+    My <label id="label-activity" for="activity">activity level</label> is
+    <select id="activity" aria-describedby="label-activity" aria-label="Activity level">
+      <option value="1.2">sedentary</option>
+      <option value="1.375">light</option>
+      <option value="1.55">moderate</option>
+      <option value="1.725">heavy</option>
+      <option value="1.9">very heavy</option>
+    </select>
+
+    and my
+    <label id="label-physique" for="physique">physique</label> is
+    <select id="physique" aria-describedby="label-physique" aria-label="Physique">
+      <option value="shredded">shredded</option>
+      <option value="lean">lean/athletic</option>
+      <option value="chubby">carrying a little fat</option>
+    </select>
+    .
+  </p>
+
+  <p>
+    My overall
+    <label id="label-goal" for="goal">goal</label> is to
+    <select id="goal" aria-describedby="label-goal" aria-label="Goal">
+      <option value="losefat">lose fat</option>
+      <option value="maintain">maintain</option>
+      <option value="gain">gain muscle</option>
+    </select>
+    .
+  </p>
+
+  <p>
+    <small>
+      <em>
+        I know my <label id="label-tdee" for="age">TDEE calories</label>, they are
+        <input id="manualCalories" type="number" placeholder="0" aria-describedby="label-tdee" aria-label="TDEE calories">.
+      </em>
+    </small>
+  </p>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Calories:</th><td><span class="calories"></span></td>
+      </tr>
+      <tr>
+        <th>Protein:</th><td><span class="protein"></span></td>
+      </tr>
+      <tr>
+        <th>Carbs:</th><td><span class="carbs"></span></td>
+      </tr>
+      <tr>
+        <th>Sugar:</th><td><span class="sugar"></span></td>
+      </tr>
+      <tr>
+        <th>Fibre:</th><td><span class="fibre"></span></td>
+      </tr>
+      <tr>
+        <th>Fats:</th><td><span class="fats"></span></td>
+      </tr>
+      <tr>
+        <th>Saturated fat:</th><td><span class="saturated"></span></td>
+      </tr>
+      <tr>
+        <th>Omega 3:</th><td><span class="omega"></span></td>
+      </tr>
+    </tbody>
+  </table>
 </main>
 
-<footer>
-  <small>Last update: 2025/08/04</small>
-</footer>
-
-<script>
-  let result;
-
-  document.querySelectorAll(["select", "input"]).forEach((trigger) => {
-    trigger.addEventListener("change", () => {
-      const age = document.getElementById("age").value,
-        height = document.getElementById("height").value,
-        weight = document.getElementById("weight").value,
-        activity = document.getElementById("activity").value,
-        sex = document.getElementById("sex").value,
-        goal = document.getElementById("goal").value;
-        physique = document.getElementById("physique").value,
-        maintenance = document.getElementById("maintenance").value,
-        proteinMultiplier = goal == "0.8" ? 1 : physique == "2.7" ? 0.8166 : 0.9,
-        fatMultiplier = 0.25,
-        disabled = document.querySelector(".disabled"),
-        bmr = maintenance != "" ? maintenance / activity : ((10 * weight) + (6.25 * height) - (5 * age) + ((sex == "male") ? 5 : -161));
-
-      result = bmr * goal;
-      maintenance != "" ? disabled.style.opacity = "0.25" : disabled.style.opacity = null;
-
-      const refeedFrequency = physique == "2.7" ? 3 : physique == "2.45" ? 2 : 1,
-        refeedCalories = refeedFrequency * (bmr * activity),
-        refeedLowDays = 7 - refeedFrequency,
-        fatLossPercentage = physique == "2.7" ? 0.25 : 0.5,
-        maintCalories = Math.round(bmr * activity),
-        weeklyMaintCalories = maintCalories * 7,
-        weeklyDietingCalories = (weeklyMaintCalories - ((7700 * (weight / 100)) * fatLossPercentage)),
-        dailyDietingCalories = Math.round((weeklyDietingCalories - refeedCalories) / refeedLowDays);
-
-      document.getElementById("totalCals").innerHTML = goal == "0.8" ? `high/low days of ${refeedFrequency}×${maintCalories} and ${refeedLowDays}×${dailyDietingCalories}` : Math.round(activity * result);
-      document.getElementById("totalProtein").innerHTML = Math.round(weight * (physique * (goal == "0.8" ? 1 : proteinMultiplier)));
-      document.getElementById("totalCarbs").innerHTML = Math.round(((activity * result) - (((weight * (physique * proteinMultiplier)) * 4) + ((activity * result) * fatMultiplier))) / 4);
-      document.getElementById("totalFibre").innerHTML = Math.round(((activity * result) / 1000) * 14);
-      document.getElementById("totalSugar").innerHTML = Math.round(((activity * result) * 0.1) / 4);
-      document.getElementById("totalFats").innerHTML = Math.round(((activity * result) * fatMultiplier) / 9);
-      document.getElementById("totalSaturatedFats").innerHTML = Math.round((((activity * result) * 0.1 ) / 9));
-    });
-  });
-</script>
+{{> footer scripts=true }}

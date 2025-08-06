@@ -1,0 +1,60 @@
+.nutrition {
+  & select,
+  & input {
+    background: unset;
+    border: unset;
+    border-bottom: 0.125ch purple solid;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.25;
+    margin: unset;
+    outline: unset;
+    padding: unset;
+    text-align: center;
+    width: auto;
+
+    &:focus {
+      border-bottom-color: red;
+    }
+  }
+
+  & select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  & input {
+    -moz-appearance: textfield;
+
+    max-width: 4ch;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+
+      margin: unset;
+    }
+  }
+
+  & table {
+    background-color: purple;
+    color: white;
+    margin-top: 2.5ch;
+    padding: 0.35ch 0.75ch;
+    width: 100%;
+
+    & th {
+      text-align: inherit;
+      vertical-align: top;
+      width: 35%;
+    }
+
+    & td {
+      padding-left: 1ch;
+    }
+  }
+}

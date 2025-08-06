@@ -4,7 +4,10 @@ import postcss from 'gulp-postcss';
 import cssnano from 'cssnano';
 import purgecss from 'gulp-purgecss';
 import {stream as critical} from 'critical';
+import compiler from 'webpack';
+import webpack from 'webpack-stream';
 import concat from 'gulp-concat';
+import uglify from 'gulp-uglify';
 import imagemin, {gifsicle, mozjpeg, optipng, svgo} from 'gulp-imagemin';
 import webp from 'gulp-webp';
 import hb from 'gulp-hb';
@@ -17,6 +20,15 @@ export const clean = () => deleteAsync('dist/');
 export function root() {
   return src('src/root/*', {encoding: false})
     .pipe(dest('dist/'))
+    .pipe(browsersync.stream());
+}
+
+export function scripts() {
+  return src('src/js/**/*.js', {encoding: false})
+    .pipe(webpack({}, compiler, function() {}))
+    .pipe(uglify())
+    .pipe(concat('main.js'))
+    .pipe(dest('dist/js/'))
     .pipe(browsersync.stream());
 }
 
@@ -126,11 +138,12 @@ export function browserSyncReload(done) {
 
 function watchFiles() {
   watch(['src/html/**/*.hbs', 'src/css/**/*.css'], htmlBuild);
+  watch('src/js/**/*', scripts);
   watch('src/img/**/*', images);
 }
 
 const htmlBuild = series(html, styles, criticalStyles, sitemaps);
-export const build = series(clean, parallel(root, images), htmlBuild);
+export const build = series(clean, parallel(root, scripts, images), htmlBuild);
 const watchSrc = series(build, browserSync, watchFiles);
 
 export default watchSrc;
