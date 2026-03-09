@@ -14,7 +14,7 @@ function nutrition() {
     caloriesWeeklyTdee = tdee * 7,
     lossPercent = physique == 'shredded' ? 0.25 : physique == 'chubby' ? 0.7 : 0.5,
     lossPercentCalories = caloriesPerPercent * lossPercent,
-    refeedDays = physique == 'shredded' ? 3 : physique == 'lean' ? 2 : 1,
+    refeedDays = document.querySelector('#refeed').value ? document.querySelector('#refeed').value : physique == 'shredded' ? 3 : physique == 'lean' ? 2 : 1,
     caloriesLoss = Math.round((caloriesWeeklyTdee - (lossPercentCalories + (refeedDays * tdee))) / (7 - refeedDays)),
     goal = document.querySelector('#goal').value;
 
