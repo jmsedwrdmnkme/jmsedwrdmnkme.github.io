@@ -1,3 +1,9 @@
+allowBuilds:
+  cwebp-bin: true
+  gifsicle: true
+  mozjpeg: true
+  optipng-bin: true
+  puppeteer: true
 onlyBuiltDependencies:
   - cwebp-bin
   - gifsicle

@@ -1,19 +1,33 @@
 .button {
-  --btn-bg: blue;
+  --btn-colour: blue;
 
-  background: var(--btn-bg);
-  color: white;
-  display: inline-block;
   margin-top: .5ch;
   padding: .5ch 1ch;
   transition: background-color .2s;
   text-decoration: none;
 
+  &:first-of-type {
+    background: var(--btn-colour);
+    color: white;
+  }
+
+  &:not(:first-of-type) {
+    color: var(--btn-colour);
+  }
+
   &:hover {
-    --btn-bg: purple;
+    --btn-colour: purple;
   }
 
   &:focus {
     outline: 0.25ch solid red;
+  }
+
+  @media (max-width: 767.98px) {
+    display: table;
+  }
+
+  @media (min: 768px) {
+    display: inline-block;
   }
 }
