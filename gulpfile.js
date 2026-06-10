@@ -69,6 +69,9 @@ export function criticalStyles() {
 }
 
 export function images() {
+  src('src/img/**/**/*.webp', {encoding: false})
+    .pipe(dest('dist/img/'))
+    .pipe(browsersync.stream());
   src('src/img/**/**/*[.jpg|.gif|.png]', {encoding: false})
     .pipe(imagemin([
       gifsicle({interlaced: true}),

@@ -1,0 +1,45 @@
+body {
+  &:has(.photography) {
+    max-width: unset;
+  }
+}
+
+.photography {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  * {
+    display: inherit;
+  }
+
+  & img {
+    width: 75vw;
+    max-width: 64rem;
+    height: auto;
+  }
+
+  & figcaption {
+    padding: 1ch;
+    position: sticky;
+    top: 0;
+  }
+
+  & figure {
+    margin: unset;
+    display: flex;
+    gap: 1ch;
+    align-items: start;
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    & + figure {
+      margin-top: -3ch;
+
+      & figcaption {
+        margin-top: 5ch;
+      }
+    }
+  }
+}
