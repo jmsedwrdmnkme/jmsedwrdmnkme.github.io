@@ -29,7 +29,7 @@
     "gulp-sitemap": "^8.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^5.1.0",
-    "webpack": "^5.107.2",
+    "webpack": "^5.108.3",
     "webpack-stream": "^7.0.0"
   }
 }
