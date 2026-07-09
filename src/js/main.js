@@ -6,54 +6,72 @@ function nutrition() {
     weight = document.querySelector('#weight').value,
     activity = document.querySelector('#activity').value,
     manualCalories = document.querySelector('#manualCalories').value,
-    bmr = Math.round((10 * weight) + (6.25 * height) - (5 * age) + ((sex == 'man') ? +5 : -161)),
-    tdee = Math.round(manualCalories ? manualCalories : bmr * activity),
+
+    bmr = Math.round(
+      (10 * weight) + (6.25 * height) - (5 * age) + ((sex == 'man') ? +5 : -161)),
+
+    tdee = Math.round(
+      manualCalories ? manualCalories :
+      bmr * activity),
+
     caloriesPerPercent = 7700 * (weight * 0.01),
     caloriesGain = Math.round((caloriesPerPercent / 30) + tdee),
     physique = document.querySelector('#physique').value,
     caloriesWeeklyTdee = tdee * 7,
-    lossPercent = physique == 'shredded' ? 0.25 : physique == 'chubby' ? 0.7 : 0.5,
+
+    lossPercent =
+      physique == 'shredded' ? 0.25 :
+      physique == 'chubby' ? 0.7 :
+      0.5,
+
     lossPercentCalories = caloriesPerPercent * lossPercent,
-    refeedDays = document.querySelector('#refeed').value ? document.querySelector('#refeed').value : physique == 'shredded' ? 3 : physique == 'lean' ? 2 : 1,
+
+    refeedDays =
+      document.querySelector('#refeed').value ? document.querySelector('#refeed').value :
+      physique == 'shredded' ? 3 :
+      physique == 'lean' ? 2 :
+      1,
+
     caloriesLoss = Math.round((caloriesWeeklyTdee - (lossPercentCalories + (refeedDays * tdee))) / (7 - refeedDays)),
-    goal = document.querySelector('#goal').value;
 
-  const totalCalories = 
-    goal == "losefat" ? `${refeedDays} x ${tdee} kcals, ${7 - refeedDays} x ${caloriesLoss} kcals (${lossPercent}% weekly weight loss)` : 
-    goal == "maintain" ? `${tdee} kcals` : 
-    `${caloriesGain} kcals (1% monthly weight gain)`;
+    goal = document.querySelector('#goal').value,
 
-  const totalProtein = Math.round(
-    goal == "losefat" ? 
-      physique == "shredded" ? weight * 2.6 : 
-      physique == "lean" ? weight * 2.3 : weight * 2.2 : 
-      physique == "chubby" ? weight * 2 : 
-    weight * 2.2);
+    totalCalories = 
+      goal == "losefat" ? `${refeedDays} x ${tdee} kcals, ${7 - refeedDays} x ${caloriesLoss} kcals (${lossPercent}% weekly weight loss)` : 
+      goal == "maintain" ? `${tdee} kcals` : 
+      `${caloriesGain} kcals (1% monthly weight gain)`;
 
-  const totalFats = Math.round(
-    goal == "losefat" ? (caloriesLoss * 0.25) / 9 : 
-    goal == "maintain" ? (tdee * 0.25) / 9 : 
-    (caloriesGain * 0.25) / 9);
+    totalProtein = Math.round(
+      goal == "losefat" ? 
+        physique == "shredded" ? weight * 2.6 : 
+        physique == "lean" ? weight * 2.3 : weight * 2.2 : 
+        physique == "chubby" ? weight * 2 : 
+      weight * 2.2),
 
-  const totalCarbs = 
-    goal == "losefat" ? `${refeedDays} x ${Math.round((tdee - ((totalProtein * 4) + (totalFats * 9))) / 4)}g, ${(7 - refeedDays)} x ${Math.round((caloriesLoss - ((totalProtein * 4) + (totalFats * 9))) / 4)}g` : 
-    goal == "maintain" ? `${Math.round((tdee - ((totalProtein * 4) + (totalFats * 9))) / 4)}g` : 
-    `${Math.round((caloriesGain - ((totalProtein * 4) + (totalFats * 9))) / 4)}g`;
+    totalFats = Math.round(
+      goal == "losefat" ? (caloriesLoss * 0.25) / 9 : 
+      goal == "maintain" ? (tdee * 0.25) / 9 : 
+      (caloriesGain * 0.25) / 9),
 
-  const totalSugar = Math.round(
-    goal == "losefat" ? (caloriesLoss * 0.1) / 4 : 
-    goal == "maintain" ? (tdee * 0.1) / 4 : 
-    (caloriesGain * 0.1) / 4);
+    totalCarbs = 
+      goal == "losefat" ? `${refeedDays} x ${Math.round((tdee - ((totalProtein * 4) + (totalFats * 9))) / 4)}g, ${(7 - refeedDays)} x ${Math.round((caloriesLoss - ((totalProtein * 4) + (totalFats * 9))) / 4)}g` : 
+      goal == "maintain" ? `${Math.round((tdee - ((totalProtein * 4) + (totalFats * 9))) / 4)}g` : 
+      `${Math.round((caloriesGain - ((totalProtein * 4) + (totalFats * 9))) / 4)}g`,
 
-  const totalFibre = Math.round(
-    goal == "losefat" ? (caloriesLoss / 1000) * 14 : 
-    goal == "maintain" ? (tdee / 1000) * 14 : 
-    (caloriesGain / 1000) * 14);
+    totalSugar = Math.round(
+      goal == "losefat" ? (caloriesLoss * 0.1) / 4 : 
+      goal == "maintain" ? (tdee * 0.1) / 4 : 
+      (caloriesGain * 0.1) / 4),
 
-  const totalSaturatedFats = Math.round(
-    goal == "losefat" ? (caloriesLoss * 0.1) / 9 : 
-    goal == "maintain" ? (tdee * 0.1) / 9 : 
-    (caloriesGain * 0.1) / 9);
+    totalFibre = Math.round(
+      goal == "losefat" ? (caloriesLoss / 1000) * 14 : 
+      goal == "maintain" ? (tdee / 1000) * 14 : 
+      (caloriesGain / 1000) * 14),
+
+    totalSaturatedFats = Math.round(
+      goal == "losefat" ? (caloriesLoss * 0.1) / 9 : 
+      goal == "maintain" ? (tdee * 0.1) / 9 : 
+      (caloriesGain * 0.1) / 9);
 
   document.querySelector('.calories').innerHTML = `${totalCalories}`;
   document.querySelector('.protein').innerHTML = `${totalProtein}g`;
