@@ -9,13 +9,15 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+* {
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
 }
 
-svg {
+svg,
+img {
   height: auto;
   max-width: 100%;
 }
