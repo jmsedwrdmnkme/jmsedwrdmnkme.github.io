@@ -1,5 +1,5 @@
 {
-  "name": "jamesmonk.me",
+  "name": "front-end-boilerplate",
   "version": "1.0.0",
   "description": "Minimal front end boilerplate, kept up to date via PNPM",
   "main": "gulpfile.js",
@@ -15,20 +15,24 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
     "browser-sync": "^3.0.4",
     "critical": "^7.2.1",
-    "cssnano": "^8.0.2",
     "del": "^8.0.1",
     "gulp": "^5.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-ext-replace": "^0.3.0",
     "gulp-hb": "^8.0.0",
     "gulp-imagemin": "^9.2.0",
-    "gulp-postcss": "^10.0.0",
     "gulp-purgecss": "^7.0.2",
+    "gulp-sass": "^6.0.1",
     "gulp-sitemap": "^8.0.0",
+    "gulp-strip-comments": "2.6.0",
+    "gulp-svg-sprite": "^2.0.3",
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^5.1.0",
+    "sass": "^1.102.0",
     "webpack": "^5.109.1",
     "webpack-stream": "^7.0.0"
   }

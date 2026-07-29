@@ -4,98 +4,148 @@
   <h1>Nutrition calculator</h1>
 </header>
 
-<main class="nutrition">
-  <p>
-    My <label id="label-sex">biological sex</label> is a
-    <select id="sex" aria-describedby="label-sex" aria-label="Sex">
-      <option value="man" selected>man</option>
-      <option value="woman">woman</option>
-    </select>
+<main id="nutrition" class="d-lg-flex gap-5">
+  <form class="col-lg">
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-sex">Sex</label>
+      <div class="col-md-8">
+        <select class="form-select" id="sex" aria-describedby="label-sex" aria-label="Sex">
+          <option value="man" selected>Man</option>
+          <option value="woman">Woman</option>
+        </select>
+      </div>
+    </div>
 
-    who is
-    <input id="age" type="number" placeholder="0" aria-describedby="label-age" aria-label="Age">
-    <label id="label-age" for="age">years old</label>.
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-age" for="age">Age</label>
+      <div class="col-md-8">
+        <input class="form-control" id="age" type="number" placeholder="30" aria-describedby="label-age" aria-label="Age">
+      </div>
+    </div>
 
-    I am
-    <input id="height" type="number" placeholder="0" aria-describedby="label-height" aria-label="Height (cm)">
-    <label id="label-height" for="height">cm in height</label>
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-height" for="height">Height</label>
+      <div class="col-md-8">
+        <div class="input-group">
+          <input class="form-control" id="height" type="number" placeholder="180" aria-describedby="label-height" aria-label="Height (cm)">
+          <span class="input-group-text">cm</span>
+        </div>
+      </div>
+    </div>
 
-    and
-    <input id="weight" type="number" placeholder="0" aria-describedby="label-weight" aria-label="Weight (kg)">
-    <label id="label-weight" for="weight">kg in weight</label>.
-  </p>
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-weight" for="weight">Weight</label>
+      <div class="col-md-8">
+        <div class="input-group">
+          <input class="form-control" id="weight" type="number" placeholder="80" aria-describedby="label-weight" aria-label="Weight (kg)">
+          <span class="input-group-text">kg</span>
+        </div>
+      </div>
+    </div>
 
-  <p>
-    My <label id="label-activity" for="activity">activity level</label> is
-    <select id="activity" aria-describedby="label-activity" aria-label="Activity level">
-      <option value="1.2">sedentary</option>
-      <option value="1.375" selected>light</option>
-      <option value="1.55">moderate</option>
-      <option value="1.725">heavy</option>
-      <option value="1.9">very heavy</option>
-    </select>
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-activity" for="activity">Activity</label>
+      <div class="col-md-8">
+        <select class="form-select" id="activity" aria-describedby="label-activity" aria-label="Activity level">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Light</option>
+          <option value="1.55" selected>Moderate</option>
+          <option value="1.725">Heavy</option>
+          <option value="1.9">Very heavy</option>
+        </select>
+      </div>
+    </div>
 
-    and my
-    <label id="label-physique" for="physique">physique</label> is
-    <select id="physique" aria-describedby="label-physique" aria-label="Physique">
-      <option value="shredded">shredded</option>
-      <option value="lean" selected>lean/athletic</option>
-      <option value="chubby">carrying a little fat</option>
-    </select>
-    .
-  </p>
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-physique" for="physique">Physique</label>
+      <div class="col-md-8">
+        <select class="form-select" id="physique" aria-describedby="label-physique" aria-label="Physique">
+          <option value="shredded">Shredded</option>
+          <option value="lean" selected>Lean/Athletic</option>
+          <option value="chubby">Carrying a little fat</option>
+        </select>
+      </div>
+    </div>
 
-  <p>
-    My overall
-    <label id="label-goal" for="goal">goal</label> is to
-    <select id="goal" aria-describedby="label-goal" aria-label="Goal">
-      <option value="losefat">lose fat</option>
-      <option value="maintain" >maintain</option>
-      <option value="gain" selected>gain muscle</option>
-    </select>
-    .
-  </p>
+    <div class="row mt-3">
+      <label class="col-md-4 col-form-label" id="label-goal" for="goal">Goal</label>
+      <div class="col-md-8">
+        <select class="form-select" id="goal" aria-describedby="label-goal" aria-label="Goal">
+          <option value="losefat">Lose fat</option>
+          <option value="maintain" selected>Maintain</option>
+          <option value="gain">Gain muscle</option>
+        </select>
+      </div>
+    </div>
 
-  <p>
-    <small>
-      <em>
-        I know my <label id="label-tdee" for="manualCalories">TDEE calories</label>, they are
-        <input id="manualCalories" type="number" placeholder="0" aria-describedby="label-tdee" aria-label="TDEE calories">.
+    <div class="row mt-3 align-items-center">
+      <label class="col col-form-label" id="label-options" for="showManualOptions">Show advanced options</label>
+      <div class="col-auto">
+        <input class="form-check-input border-2 border-primary" id="showManualOptions" type="checkbox" aria-describedby="label-options" aria-label="Show advanced options" autocomplete="off">
+      </div>
+    </div>
 
-        I would prefer <input id="refeed" type="number" placeholder="0" aria-describedby="label-refeed" aria-label="Refeed days">
-        <label id="label-refeed" for="refeed">refeed days</label> when losing fat.
-      </em>
-    </small>
-  </p>
+    <div class="row mt-3 px-2 pt-3 bg-success text-light">
+      <label class="col-md-4 col-form-label" id="label-tdee" for="manualCalories">TDEE</label>
+      <div class="col-md-8">
+        <div class="input-group">
+          <input class="form-control" id="manualCalories" type="number" placeholder="0" aria-describedby="label-tdee" aria-label="TDEE calories">
+          <span class="input-group-text">kcals</span>
+        </div>
+      </div>
+    </div>
 
-  <table>
+    <div class="row py-3 px-2 bg-success text-light">
+      <label class="col-md-4 col-form-label" id="label-refeed" for="refeed">Refeeds</label>
+      <div class="col-md-8">
+        <div class="input-group">
+          <input class="form-control" id="refeed" type="number" placeholder="0" aria-describedby="label-refeed" aria-label="Refeed days">
+          <span class="input-group-text">days a week</span>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-primary col-lg mt-3">
+    <thead hidden>
+      <tr>
+        <th scope="col">Nutrition</th>
+        <th scope="col">Recommended</th>
+      </tr>
+    </thead>
     <tbody>
       <tr>
-        <th>Calories:</th><td><span class="calories"></span></td>
+        <th scope="row">Calories</th><td><span class="calories"></span></td>
       </tr>
       <tr>
-        <th>Protein:</th><td><span class="protein"></span></td>
+        <th scope="row">Protein</th><td><span class="protein"></span></td>
       </tr>
       <tr>
-        <th>Carbs:</th><td><span class="carbs"></span></td>
+        <th scope="row">Carbs</th><td><span class="carbs"></span></td>
       </tr>
       <tr>
-        <th>Sugar:</th><td><span class="sugar"></span></td>
+        <th scope="row">Sugar</th><td><span class="sugar"></span></td>
       </tr>
       <tr>
-        <th>Fibre:</th><td><span class="fibre"></span></td>
+        <th scope="row">Fibre</th><td><span class="fibre"></span></td>
       </tr>
       <tr>
-        <th>Fats:</th><td><span class="fats"></span></td>
+        <th scope="row">Fats</th><td><span class="fats"></span></td>
       </tr>
       <tr>
-        <th>Saturated fat:</th><td><span class="saturated"></span></td>
+        <th scope="row">Saturated fat</th><td><span class="saturated"></span></td>
       </tr>
       <tr>
-        <th>Omega 3:</th><td><span class="omega"></span></td>
+        <th scope="row">Omega 3</th><td><span class="omega"></span></td>
       </tr>
     </tbody>
   </table>
 </main>
+
+<style>
+.row:has([type="checkbox"]):not(:has(:checked)) ~ .row {
+  display: none;
+}
+</style>
 
 {{> footer scripts=true }}

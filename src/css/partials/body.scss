@@ -1,0 +1,7 @@
+body {
+  padding: 5vw;
+
+  &:not(:has(#nutrition)) {
+    max-width: 80ch;
+  }
+}
