@@ -1,3 +1,3 @@
 # jamesmonk.me
 
-My (sparse) homepage, build on https://github.com/jmsedwrdmnkme/front-end-boilerplate
+My (sparse) homepage, built on https://github.com/jmsedwrdmnkme/front-end-boilerplate
