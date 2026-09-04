@@ -147,7 +147,7 @@ function criticalStyles() {
 // Javascript
 function scripts() {
   return src(paths.scripts.src, { sourcemaps: true })
-    .pipe(jshint())
+    .pipe(jshint({ esversion: 6 }))
     .pipe(jshint.reporter('default'))
     .pipe(webpack({}, compiler, function() {}))
     .pipe(concat('main.js'))
