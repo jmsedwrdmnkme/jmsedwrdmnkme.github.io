@@ -147,9 +147,9 @@ function criticalStyles() {
 // Javascript
 function scripts() {
   return src(paths.scripts.src, { sourcemaps: true })
-    .pipe(webpack({}, compiler, function() {}))
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
+    .pipe(webpack({}, compiler, function() {}))
     .pipe(concat('main.js'))
     .pipe(uglify())
     .pipe(dest(paths.scripts.dest, { sourcemaps: '.' }));
