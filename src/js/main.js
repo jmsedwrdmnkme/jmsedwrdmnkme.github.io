@@ -42,7 +42,7 @@ function nutrition() {
     totalCalories = 
       goal == "losefat" ? `${refeedDays} x ${tdee} kcals, ${7 - refeedDays} x ${caloriesLoss} kcals (${lossPercent}% weekly weight loss)` : 
       goal == "maintain" ? `${tdee} kcals` : 
-      `${caloriesGain} kcals (1% monthly weight gain)`;
+      `${caloriesGain} kcals (1% monthly weight gain)`,
 
     totalProtein = Math.round(
       goal == "losefat" ? 
@@ -86,4 +86,4 @@ function nutrition() {
   document.querySelector('.omega').innerHTML = `1-2g (DHA+EPA)`;
 }
 
-document.querySelectorAll(["select", "input"]).forEach((trigger) => trigger.addEventListener("change", () => nutrition()));
+document.querySelectorAll(['select', 'input']).forEach((trigger) => trigger.addEventListener('change', () => nutrition()));
