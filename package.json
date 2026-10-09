@@ -1,5 +1,5 @@
 {
-  "name": "front-end-boilerplate",
+  "name": "jamesmonk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,10 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "packageManager": "pnpm@11.22.0",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^12.8.1",
+      "version": "11.22.0",
       "onFail": "download"
     }
   },
